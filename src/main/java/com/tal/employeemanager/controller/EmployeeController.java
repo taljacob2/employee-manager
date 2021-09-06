@@ -37,11 +37,15 @@ import java.util.List;
         return new ResponseEntity<>(employeeEntityResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping public ResponseEntity<EmployeeEntity> updateEmployee(
+    @PutMapping public ResponseEntity<?> updateEmployee(
             @RequestBody EmployeeEntity employeeEntity) {
-        EmployeeEntity employeeEntityResponse =
-                employeeService.update(employeeEntity);
-        return new ResponseEntity<>(employeeEntityResponse, HttpStatus.OK);
+        EmployeeEntity employeeEntityResponse = null;
+        try {
+            employeeEntityResponse = employeeService.update(employeeEntity);
+            return new ResponseEntity<>(employeeEntityResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("{id}")

@@ -14,6 +14,10 @@ import java.util.UUID;
 
     @Autowired EmployeeRepository employeeRepository;
 
+    private String entityNotFoundExceptionMessage(Long id) {
+        return "EmployeeEntity id `" + id + "` was not found.";
+    }
+
     @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
         return employeeRepository.save(employeeEntity);
@@ -28,12 +32,24 @@ import java.util.UUID;
                 employeeRepository.findById(id);
         if (!optionalEmployeeEntity.isPresent()) {
             throw new EntityNotFoundException(
-                    "EmployeeEntity id: " + id + " was not found.");
+                    entityNotFoundExceptionMessage(id));
         }
         return optionalEmployeeEntity.get();
     }
 
     @Override public EmployeeEntity update(EmployeeEntity employeeEntity) {
+        Long id = employeeEntity.getId();
+
+        if (id == null) {
+            throw new EntityNotFoundException(
+                    entityNotFoundExceptionMessage(id));
+        }
+
+        if (find(id) == null) {
+            throw new EntityNotFoundException(
+                    entityNotFoundExceptionMessage(id));
+        }
+
         return employeeRepository.save(employeeEntity);
     }
 
