@@ -1,4 +1,4 @@
-package com.tal.employeemanager.service;
+package com.tal.employeemanager.service.employee;
 
 import com.tal.employeemanager.entity.EmployeeEntity;
 import com.tal.employeemanager.repository.EmployeeRepository;
