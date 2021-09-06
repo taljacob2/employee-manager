@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data @Entity @Table public class EmployeeEntity implements Serializable {
 
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2330332252646363304L;
 
     @Id @GeneratedValue @Column(nullable = false, updatable = false)
     @Setter(AccessLevel.NONE) private Long id;
