@@ -1,4 +1,4 @@
-package com.tal.employeemanager.model;
+package com.tal.employeemanager.entity;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data @Entity @Table public class Employee implements Serializable {
+@Data @Entity @Table public class EmployeeEntity implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
