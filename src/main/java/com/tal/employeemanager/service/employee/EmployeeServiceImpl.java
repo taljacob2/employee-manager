@@ -14,16 +14,16 @@ import java.util.UUID;
 
     @Autowired EmployeeRepository employeeRepository;
 
-    public EmployeeEntity insert(EmployeeEntity employeeEntity) {
+    @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
         return employeeRepository.save(employeeEntity);
     }
 
-    public List<EmployeeEntity> findAll() {
+    @Override public List<EmployeeEntity> findAll() {
         return employeeRepository.findAll();
     }
 
-    public EmployeeEntity find(Long id) {
+    @Override public EmployeeEntity find(Long id) {
         Optional<EmployeeEntity> optionalEmployeeEntity =
                 employeeRepository.findById(id);
         if (!optionalEmployeeEntity.isPresent()) {
@@ -33,11 +33,11 @@ import java.util.UUID;
         return optionalEmployeeEntity.get();
     }
 
-    public EmployeeEntity update(EmployeeEntity employeeEntity) {
+    @Override public EmployeeEntity update(EmployeeEntity employeeEntity) {
         return employeeRepository.save(employeeEntity);
     }
 
-    public void delete(Long id) {
+    @Override public void delete(Long id) {
         employeeRepository.deleteById(id);
     }
 }
