@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Controller @RequestMapping("employee") public class EmployeeController {
@@ -19,10 +20,14 @@ import java.util.List;
         return new ResponseEntity<>(employeeEntities, HttpStatus.OK);
     }
 
-    @GetMapping("{id}") public ResponseEntity<EmployeeEntity> getEmployeesById(
-            @PathVariable("id") Long id) {
-        EmployeeEntity employeeEntities = employeeService.find(id);
-        return new ResponseEntity<>(employeeEntities, HttpStatus.OK);
+    @GetMapping("{id}")
+    public ResponseEntity<?> getEmployeesById(@PathVariable("id") Long id) {
+        try {
+            EmployeeEntity employeeEntity = employeeService.find(id);
+            return new ResponseEntity<>(employeeEntity, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping public ResponseEntity<EmployeeEntity> insertEmployee(

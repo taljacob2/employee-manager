@@ -28,7 +28,7 @@ import java.util.UUID;
                 employeeRepository.findById(id);
         if (!optionalEmployeeEntity.isPresent()) {
             throw new EntityNotFoundException(
-                    "EmployeeEntity id: " + id + "was not found.");
+                    "EmployeeEntity id: " + id + " was not found.");
         }
         return optionalEmployeeEntity.get();
     }
