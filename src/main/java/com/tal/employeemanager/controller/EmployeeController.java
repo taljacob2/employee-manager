@@ -14,34 +14,32 @@ import java.util.List;
 
     @Autowired EmployeeService employeeService;
 
-    @GetMapping("all")
-    public ResponseEntity<List<EmployeeEntity>> getAllEmployees() {
+    @GetMapping public ResponseEntity<List<EmployeeEntity>> getAllEmployees() {
         List<EmployeeEntity> employeeEntities = employeeService.findAll();
         return new ResponseEntity<>(employeeEntities, HttpStatus.OK);
     }
 
-    @GetMapping("find/{id}")
-    public ResponseEntity<EmployeeEntity> getEmployeesById(
+    @GetMapping("{id}") public ResponseEntity<EmployeeEntity> getEmployeesById(
             @PathVariable("id") Long id) {
         EmployeeEntity employeeEntities = employeeService.find(id);
         return new ResponseEntity<>(employeeEntities, HttpStatus.OK);
     }
 
-    @PostMapping("insert") public ResponseEntity<EmployeeEntity> insertEmployee(
+    @PostMapping public ResponseEntity<EmployeeEntity> insertEmployee(
             @RequestBody EmployeeEntity employeeEntity) {
         EmployeeEntity employeeEntityResponse =
                 employeeService.insert(employeeEntity);
         return new ResponseEntity<>(employeeEntityResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("update") public ResponseEntity<EmployeeEntity> updateEmployee(
+    @PutMapping public ResponseEntity<EmployeeEntity> updateEmployee(
             @RequestBody EmployeeEntity employeeEntity) {
         EmployeeEntity employeeEntityResponse =
                 employeeService.update(employeeEntity);
         return new ResponseEntity<>(employeeEntityResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
