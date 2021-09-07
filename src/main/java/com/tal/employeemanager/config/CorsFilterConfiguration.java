@@ -8,6 +8,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
+/**
+ * Expose the {@code api} to port 4200, via {@code Cors} configuration.
+ */
 @Configuration public class CorsFilterConfiguration {
 
     @Bean public CorsFilter corsFilter() {
