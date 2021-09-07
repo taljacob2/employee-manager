@@ -23,8 +23,7 @@ import java.util.Arrays;
                         "Access-Control-Request-Headers"));
         corsConfiguration.setExposedHeaders(
                 Arrays.asList("Origin", "Content-Type", "Accept",
-                        "Authorization", "Origin, Accept", "X-Requested-With",
-                        "Access-Control-Allow-Origin",
+                        "Authorization", "Access-Control-Allow-Origin",
                         "Access-Control-Request-Credentials"));
         corsConfiguration.setAllowedMethods(
                 Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
