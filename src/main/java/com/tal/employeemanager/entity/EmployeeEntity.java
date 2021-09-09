@@ -18,5 +18,6 @@ import java.io.Serializable;
     private String jobTitle;
     private String phone;
     private String imageURL;
+    @ManyToOne private CityEntity city;
     @Column(nullable = false, updatable = false) private String code;
 }

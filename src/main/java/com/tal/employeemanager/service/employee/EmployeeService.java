@@ -5,6 +5,7 @@ import com.tal.employeemanager.entity.EmployeeEntity;
 import java.util.List;
 
 public interface EmployeeService {
+
     EmployeeEntity insert(EmployeeEntity employeeEntity);
 
     List<EmployeeEntity> findAll();
