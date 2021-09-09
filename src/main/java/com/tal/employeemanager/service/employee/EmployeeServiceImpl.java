@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,7 +21,13 @@ import java.util.UUID;
 
     @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
-        return employeeRepository.save(employeeEntity);
+        try {
+            return employeeRepository.save(employeeEntity);
+        } catch (IllegalArgumentException e) {
+            throw new NonUniqueResultException(
+                    "the city name: `" + employeeEntity.getCity().getName() +
+                            "` is unique, and had already been placed.");
+        }
     }
 
     @Override public List<EmployeeEntity> findAll() {

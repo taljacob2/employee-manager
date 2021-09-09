@@ -30,11 +30,16 @@ import java.util.List;
         }
     }
 
-    @PostMapping public ResponseEntity<EmployeeEntity> insertEmployee(
+    @PostMapping public ResponseEntity<?> insertEmployee(
             @RequestBody EmployeeEntity employeeEntity) {
-        EmployeeEntity employeeEntityResponse =
-                employeeService.insert(employeeEntity);
-        return new ResponseEntity<>(employeeEntityResponse, HttpStatus.CREATED);
+        try {
+            EmployeeEntity employeeEntityResponse =
+                    employeeService.insert(employeeEntity);
+            return new ResponseEntity<>(employeeEntityResponse,
+                    HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+        }
     }
 
     @PutMapping public ResponseEntity<?> updateEmployee(
