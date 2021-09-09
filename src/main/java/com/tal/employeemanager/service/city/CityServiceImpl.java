@@ -17,7 +17,7 @@ import java.util.List;
         CityEntity returnValue = null;
         try {
             returnValue = cityRepository.save(cityEntity);
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             throw new NonUniqueResultException(
                     "the name: `" + cityEntity.getName() +
                             "` is unique, and had already been placed.");
