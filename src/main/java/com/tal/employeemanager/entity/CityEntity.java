@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data @Entity @Table public class CityEntity implements Serializable {
+@Data @Entity(name = "city") @Table public class CityEntity
+        implements Serializable {
 
     private static final long serialVersionUID = 2056536010779857852L;
 

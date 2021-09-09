@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data @Entity @Table public class EmployeeEntity implements Serializable {
+@Data @Entity(name = "employee") @Table public class EmployeeEntity
+        implements Serializable {
 
     private static final long serialVersionUID = -2330332252646363304L;
 
