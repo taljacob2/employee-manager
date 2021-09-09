@@ -12,8 +12,11 @@ import java.io.Serializable;
 
     private static final long serialVersionUID = 2056536010779857852L;
 
-    @Id @GeneratedValue @Column(nullable = false, updatable = false)
-    @Setter(AccessLevel.NONE) private Long id;
+    @Id @SequenceGenerator(name = "city_sequence", schema = "city_sequence",
+            allocationSize = 1) @GeneratedValue(generator = "city_sequence",
+            strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false) @Setter(AccessLevel.NONE)
+    private Long id;
 
-    private String name;
+    @Column(unique = true, nullable = false) private String name;
 }

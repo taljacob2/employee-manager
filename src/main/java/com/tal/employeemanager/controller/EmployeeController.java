@@ -39,9 +39,9 @@ import java.util.List;
 
     @PutMapping public ResponseEntity<?> updateEmployee(
             @RequestBody EmployeeEntity employeeEntity) {
-        EmployeeEntity employeeEntityResponse = null;
         try {
-            employeeEntityResponse = employeeService.update(employeeEntity);
+            EmployeeEntity employeeEntityResponse =
+                    employeeService.update(employeeEntity);
             return new ResponseEntity<>(employeeEntityResponse, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
