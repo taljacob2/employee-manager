@@ -9,10 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * {@code @JsonIdentityInfo} is used in order to prevent the cyclic dependency
- * of {@code @ManyToOne} and {@code @OneToMany}
- */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id") @Data @Entity(name = "employee") @Table
 public class EmployeeEntity implements Serializable {
@@ -30,6 +26,6 @@ public class EmployeeEntity implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageURL;
-    @ManyToOne(cascade = CascadeType.ALL) private CityEntity city;
+    @ManyToOne(cascade = CascadeType.REMOVE) private CityEntity city;
     @Column(nullable = false, updatable = false) private String code;
 }
