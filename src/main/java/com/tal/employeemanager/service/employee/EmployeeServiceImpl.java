@@ -30,7 +30,7 @@ import java.util.UUID;
             insertCity(employeeEntity);
             returnValue = insertEmployee(employeeEntity);
         } catch (Exception e) {
-            log.warn("bad caught!"); // debug
+            log.error("Exception caught!");
         }
 
         return returnValue;
