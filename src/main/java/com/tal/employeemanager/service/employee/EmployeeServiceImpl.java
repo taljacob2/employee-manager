@@ -27,13 +27,23 @@ import java.util.UUID;
         employeeEntity.setCode(UUID.randomUUID().toString());
         EmployeeEntity returnValue = null;
         try {
-            insertCity(employeeEntity);
+            validateCity(employeeEntity);
+            checkIfThereAreNotNeededCities(employeeEntity);
             returnValue = insertEmployee(employeeEntity);
         } catch (Exception e) {
-            log.error("Exception caught!");
+            log.error("Exception caught! probably city not unique");
         }
 
         return returnValue;
+    }
+
+    private void checkIfThereAreNotNeededCities(EmployeeEntity employeeEntity) {
+        String cityName = employeeEntity.getCity().getName();
+        List<EmployeeEntity> employeeEntities =
+                employeeRepository.findByCityName(cityName);
+        if (employeeEntities.size() == 0) {
+            cityRepository.deleteByName(cityName);
+        }
     }
 
     private EmployeeEntity insertEmployee(EmployeeEntity employeeEntity) {
@@ -47,7 +57,7 @@ import java.util.UUID;
      * @param employeeEntity the requested {@link EmployeeEntity} to be saved,
      *                       which includes the {@link CityEntity#getName()}.
      */
-    private void insertCity(EmployeeEntity employeeEntity) {
+    private void validateCity(EmployeeEntity employeeEntity) {
         String cityName = employeeEntity.getCity().getName();
         Optional<CityEntity> cityEntityOptional =
                 cityRepository.findByName(cityName);
@@ -70,6 +80,10 @@ import java.util.UUID;
     }
 
     @Override public EmployeeEntity find(Long id) {
+        return findById(id);
+    }
+
+    private EmployeeEntity findById(Long id) {
         Optional<EmployeeEntity> optionalEmployeeEntity =
                 employeeRepository.findById(id);
         if (!optionalEmployeeEntity.isPresent()) {
@@ -82,15 +96,12 @@ import java.util.UUID;
     @Override public EmployeeEntity update(EmployeeEntity employeeEntity) {
         Long id = employeeEntity.getId();
 
-        if (id == null) {
-            throw new EntityNotFoundException(
-                    entityNotFoundExceptionMessage(id));
-        }
+        // if (id == null) {
+        //     throw new EntityNotFoundException(
+        //             entityNotFoundExceptionMessage(id));
+        // }
 
-        if (find(id) == null) {
-            throw new EntityNotFoundException(
-                    entityNotFoundExceptionMessage(id));
-        }
+        findById(id); // May throw an exception when not found
 
         return employeeRepository.save(employeeEntity);
     }
