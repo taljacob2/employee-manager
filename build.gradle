@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'war'
 }
 
 group = 'com.tal'
@@ -29,4 +30,19 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+nameArchive("web")
+
+private void nameArchive(String name) {
+    project.setArchivesBaseName(name)
+    project.setVersion("")
+
+    jar {
+        classifier = ''
+    }
+
+    war {
+        classifier = ''
+    }
 }
