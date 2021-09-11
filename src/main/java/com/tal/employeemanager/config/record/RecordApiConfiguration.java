@@ -49,7 +49,8 @@ import java.util.List;
      * <tt>application.properties</tt> file.
      * </blockquote>
      */
-    @Scheduled(fixedRateString = "PT15M", initialDelayString = "PT15M")
+    @Scheduled(fixedRateString = "${record.api.fetch.delay}",
+            initialDelayString = "${record.api.fetch.delay}")
     private void insertSettlementEntitiesScheduled() {
         insertSettlementEntities();
     }
