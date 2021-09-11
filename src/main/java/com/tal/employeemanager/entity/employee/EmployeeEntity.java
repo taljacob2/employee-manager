@@ -2,7 +2,7 @@ package com.tal.employeemanager.entity.employee;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.tal.employeemanager.entity.record.Record;
+import com.tal.employeemanager.entity.settlement.Record;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;

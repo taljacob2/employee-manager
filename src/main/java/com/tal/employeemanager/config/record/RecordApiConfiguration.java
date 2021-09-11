@@ -1,7 +1,7 @@
 package com.tal.employeemanager.config.record;
 
-import com.tal.employeemanager.entity.record.Record;
-import com.tal.employeemanager.entity.record.Root;
+import com.tal.employeemanager.entity.settlement.Record;
+import com.tal.employeemanager.entity.settlement.Root;
 import com.tal.employeemanager.repository.record.RecordRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

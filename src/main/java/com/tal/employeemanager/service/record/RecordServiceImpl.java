@@ -1,6 +1,6 @@
 package com.tal.employeemanager.service.record;
 
-import com.tal.employeemanager.entity.record.Record;
+import com.tal.employeemanager.entity.settlement.Record;
 import com.tal.employeemanager.repository.record.RecordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

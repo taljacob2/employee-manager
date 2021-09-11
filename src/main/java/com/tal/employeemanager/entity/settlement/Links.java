@@ -1,4 +1,4 @@
-package com.tal.employeemanager.entity.record;
+package com.tal.employeemanager.entity.settlement;
 
 import lombok.Data;
 

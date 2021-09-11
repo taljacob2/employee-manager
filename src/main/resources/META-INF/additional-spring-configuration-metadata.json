@@ -4,5 +4,6 @@
       "name": "record.api.link",
       "type": "java.lang.String",
       "description": "Description for record.api.link."
-  }
-] }
+    }
+  ]
+}

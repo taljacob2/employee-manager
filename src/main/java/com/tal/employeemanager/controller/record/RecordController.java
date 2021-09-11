@@ -1,6 +1,6 @@
 package com.tal.employeemanager.controller.record;
 
-import com.tal.employeemanager.entity.record.Record;
+import com.tal.employeemanager.entity.settlement.Record;
 import com.tal.employeemanager.service.record.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
