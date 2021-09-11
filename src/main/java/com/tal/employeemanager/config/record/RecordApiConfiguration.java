@@ -50,7 +50,7 @@ import java.util.List;
      * </blockquote>
      */
     @Scheduled(fixedRateString = "PT15M", initialDelayString = "PT15M")
-    private void scheduledInsertSettlementEntities() {
+    private void insertSettlementEntitiesScheduled() {
         insertSettlementEntities();
     }
 
