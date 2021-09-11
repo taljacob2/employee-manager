@@ -32,6 +32,7 @@ import java.util.List;
     @Override public void run(String... args) throws Exception {
         List<Record> records = extractRecordsFromApi();
         settlementService.insertSettlementEntities(records);
+        // insertRecords(records);
     }
 
     private List<Record> extractRecordsFromApi() {
