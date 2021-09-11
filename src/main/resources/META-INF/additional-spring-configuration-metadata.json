@@ -4,6 +4,11 @@
       "name": "record.api.link",
       "type": "java.lang.String",
       "description": "Description for record.api.link."
+    },
+    {
+      "name": "record.api.fetch.enabled",
+      "type": "java.lang.String",
+      "description": "Description for record.api.fetch.enabled."
     }
   ]
 }

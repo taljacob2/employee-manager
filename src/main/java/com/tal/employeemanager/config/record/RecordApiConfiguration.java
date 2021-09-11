@@ -7,8 +7,11 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,21 +20,38 @@ import java.util.List;
 /**
  * The <i>IsraelCityEntity</i> is the {@link Record} class.
  */
-@Slf4j @Data @Configuration public class RecordApiConfiguration
-        implements CommandLineRunner {
+@Slf4j @ConditionalOnProperty(name = "record.api.fetch.enabled")
+@EnableScheduling @Data @Configuration public class RecordApiConfiguration {
 
     private final RestTemplate restTemplate = new RestTemplate();
-
-    @Value("${record.api.link}") String recordApiLink;
-
-    // @Autowired RecordRepository recordRepository; // FIXME: Unused. Redundant.
-
     @Autowired SettlementService settlementService;
+    @Value("${record.api.link}") private String recordApiLink;
 
-    @Override public void run(String... args) throws Exception {
+    /**
+     * Initial {@code @Bean} GET API.
+     * <blockquote>Note: Depends on {@code record.api.fetch.enabled} in
+     * <tt>application.properties</tt> file.
+     * </blockquote>
+     *
+     * @return Records extracted from API.
+     */
+    @Bean public List<Record> insertSettlementEntities() {
         List<Record> records = extractRecordsFromApi();
         settlementService.insertSettlementEntities(records);
-        // insertRecords(records);
+        return records;
+    }
+
+    /**
+     * {@code @Scheduled} GET API.
+     * <blockquote> Note: The host <tt>data.gov.il</tt> is updating once per
+     * 15 minutes.</blockquote>
+     * <blockquote>Note: Depends on {@code record.api.fetch.enabled} in
+     * <tt>application.properties</tt> file.
+     * </blockquote>
+     */
+    @Scheduled(fixedRateString = "PT15M", initialDelayString = "PT15M")
+    private void scheduledInsertSettlementEntities() {
+        insertSettlementEntities();
     }
 
     private List<Record> extractRecordsFromApi() {
@@ -45,9 +65,4 @@ import java.util.List;
         return returnValue;
     }
 
-    private void insertRecords(List<Record> records) {
-        for (Record record : records) {
-            // recordRepository.save(record);
-        }
-    }
 }
