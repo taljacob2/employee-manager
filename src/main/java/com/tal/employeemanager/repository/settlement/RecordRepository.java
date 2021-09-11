@@ -1,4 +1,4 @@
-package com.tal.employeemanager.repository.record;
+package com.tal.employeemanager.repository.settlement;
 
 import com.tal.employeemanager.entity.settlement.Record;
 import org.springframework.data.jpa.repository.JpaRepository;

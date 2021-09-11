@@ -2,7 +2,8 @@ package com.tal.employeemanager.config.record;
 
 import com.tal.employeemanager.entity.settlement.Record;
 import com.tal.employeemanager.entity.settlement.Root;
-import com.tal.employeemanager.repository.record.RecordRepository;
+import com.tal.employeemanager.repository.settlement.RecordRepository;
+import com.tal.employeemanager.service.settlement.SettlementService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,31 +22,32 @@ import java.util.List;
         implements CommandLineRunner {
 
     private final RestTemplate restTemplate = new RestTemplate();
+
     @Value("${record.api.link}") String recordApiLink;
-    @Autowired RecordRepository repository;
-    private List<Record> records = null;
+
+    @Autowired RecordRepository repository; // FIXME: Unused. Redundant.
+
+    @Autowired SettlementService settlementService;
 
     @Override public void run(String... args) throws Exception {
-        extractApiAndInsertToDB();
+        List<Record> records = extractRecordsFromApi();
+        settlementService.insertSettlementEntities(records);
     }
 
-    private void extractApiAndInsertToDB() {
-        extractApi();
-        insertRecordsToDB();
-    }
-
-    private void insertRecordsToDB() {
-        for (Record record : records) {
-            repository.save(record);
-        }
-    }
-
-    private void extractApi() {
+    private List<Record> extractRecordsFromApi() {
+        List<Record> returnValue = null;
         try {
             Root root = restTemplate.getForObject(recordApiLink, Root.class);
-            records = root.getResult().getRecords();
+            returnValue = root.getResult().getRecords();
         } catch (HttpClientErrorException e) {
             log.error(e.getResponseBodyAsString());
+        }
+        return returnValue;
+    }
+
+    private void insertRecords(List<Record> records) {
+        for (Record record : records) {
+            repository.save(record);
         }
     }
 }
