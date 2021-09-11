@@ -1,6 +1,6 @@
-package com.tal.employeemanager.controller;
+package com.tal.employeemanager.controller.employee;
 
-import com.tal.employeemanager.entity.EmployeeEntity;
+import com.tal.employeemanager.entity.employee.EmployeeEntity;
 import com.tal.employeemanager.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,14 @@
-package com.tal.employeemanager.entity.israelcityapi;
+package com.tal.employeemanager.entity.record;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Data public class Result{
+@Data public class Result implements Serializable {
+
+    private static final long serialVersionUID = -8334649255571298736L;
+
     public boolean include_total;
     public int limit;
     public String records_format;

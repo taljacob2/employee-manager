@@ -1,4 +1,4 @@
-package com.tal.employeemanager.config;
+package com.tal.employeemanager.config.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

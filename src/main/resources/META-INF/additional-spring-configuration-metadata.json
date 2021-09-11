@@ -1,8 +1,8 @@
 {
   "properties": [
     {
-      "name": "israel.city.api.link",
+      "name": "record.api.link",
       "type": "java.lang.String",
-      "description": "Description for israel.city.api.link."
+      "description": "Description for record.api.link."
   }
 ] }

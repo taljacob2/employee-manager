@@ -1,8 +1,8 @@
-package com.tal.employeemanager.config;
+package com.tal.employeemanager.config.record;
 
-import com.tal.employeemanager.entity.israelcityapi.Record;
-import com.tal.employeemanager.entity.israelcityapi.Root;
-import com.tal.employeemanager.repository.IsraelCityRepository;
+import com.tal.employeemanager.entity.record.Record;
+import com.tal.employeemanager.entity.record.Root;
+import com.tal.employeemanager.repository.record.RecordRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,20 @@ import java.util.List;
 /**
  * The <i>IsraelCityEntity</i> is the {@link Record} class.
  */
-@Slf4j @Data @Configuration public class IsraelCityAPIConfiguration
+@Slf4j @Data @Configuration public class RecordApiConfiguration
         implements CommandLineRunner {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    @Value("${israel.city.api.link}") String israelCityAPILink;
-    @Autowired IsraelCityRepository repository;
+    @Value("${record.api.link}") String recordApiLink;
+    @Autowired RecordRepository repository;
     private List<Record> records = null;
 
     @Override public void run(String... args) throws Exception {
-        extractAPI();
+        extractApiAndInsertToDB();
+    }
+
+    private void extractApiAndInsertToDB() {
+        extractApi();
         insertRecordsToDB();
     }
 
@@ -36,10 +40,9 @@ import java.util.List;
         }
     }
 
-    private void extractAPI() {
+    private void extractApi() {
         try {
-            Root root =
-                    restTemplate.getForObject(israelCityAPILink, Root.class);
+            Root root = restTemplate.getForObject(recordApiLink, Root.class);
             records = root.getResult().getRecords();
         } catch (HttpClientErrorException e) {
             log.error(e.getResponseBodyAsString());

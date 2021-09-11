@@ -1,7 +1,8 @@
-package com.tal.employeemanager.entity;
+package com.tal.employeemanager.entity.employee;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.tal.employeemanager.entity.record.Record;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -26,6 +27,6 @@ public class EmployeeEntity implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageURL;
-    @ManyToOne(cascade = CascadeType.REMOVE) private CityEntity city;
+    @ManyToOne private Record record;
     @Column(nullable = false, updatable = false) private String code;
 }
