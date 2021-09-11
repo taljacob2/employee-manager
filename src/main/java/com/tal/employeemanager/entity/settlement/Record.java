@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * This class is a <i>IsraelCityEntity</i>.
  */
-@Data /*@Entity @Table*/ public class Record implements Serializable {
+@Data public class Record implements Serializable {
 
     private static final long serialVersionUID = 4161791001550581801L;
 

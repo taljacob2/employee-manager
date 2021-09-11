@@ -2,7 +2,6 @@ package com.tal.employeemanager.config.record;
 
 import com.tal.employeemanager.entity.settlement.Record;
 import com.tal.employeemanager.entity.settlement.Root;
-import com.tal.employeemanager.repository.settlement.RecordRepository;
 import com.tal.employeemanager.service.settlement.SettlementService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ import java.util.List;
 
     @Value("${record.api.link}") String recordApiLink;
 
-    @Autowired RecordRepository repository; // FIXME: Unused. Redundant.
+    // @Autowired RecordRepository recordRepository; // FIXME: Unused. Redundant.
 
     @Autowired SettlementService settlementService;
 
@@ -48,7 +47,7 @@ import java.util.List;
 
     private void insertRecords(List<Record> records) {
         for (Record record : records) {
-            repository.save(record);
+            // recordRepository.save(record);
         }
     }
 }
