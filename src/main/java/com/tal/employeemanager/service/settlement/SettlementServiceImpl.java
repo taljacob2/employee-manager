@@ -16,6 +16,10 @@ import java.util.List;
         return settlementRepository.findAll();
     }
 
+    @Override public List<SettlementEntity> findByOrderByNameAsc() {
+        return settlementRepository.findByOrderByNameAsc();
+    }
+
     @Override public void insertSettlementEntities(List<Record> records) {
         for (Record record : records) {
             SettlementEntity settlementEntity = new SettlementEntity();

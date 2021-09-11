@@ -8,5 +8,7 @@ import java.util.List;
 public interface SettlementService {
     List<SettlementEntity> findAll();
 
+    List<SettlementEntity> findByOrderByNameAsc();
+
     void insertSettlementEntities(List<Record> records);
 }

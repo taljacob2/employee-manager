@@ -35,10 +35,8 @@ import java.util.List;
      *
      * @return Records extracted from API.
      */
-    @Bean public List<Record> insertSettlementEntities() {
-        List<Record> records = extractRecordsFromApi();
-        settlementService.insertSettlementEntities(records);
-        return records;
+    @Bean public List<Record> insertSettlementEntitiesBean() {
+        return insertSettlementEntities();
     }
 
     /**
@@ -53,6 +51,12 @@ import java.util.List;
             initialDelayString = "${record.api.fetch.delay}")
     private void insertSettlementEntitiesScheduled() {
         insertSettlementEntities();
+    }
+
+    private List<Record> insertSettlementEntities() {
+        List<Record> records = extractRecordsFromApi();
+        settlementService.insertSettlementEntities(records);
+        return records;
     }
 
     private List<Record> extractRecordsFromApi() {

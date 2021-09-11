@@ -15,8 +15,15 @@ import java.util.List;
 
     @Autowired SettlementService settlementService;
 
-    @GetMapping public ResponseEntity<List<SettlementEntity>> getAllRecords() {
-        List<SettlementEntity> records = settlementService.findAll();
-        return new ResponseEntity<>(records, HttpStatus.OK);
+    @GetMapping public ResponseEntity<List<SettlementEntity>> findAll() {
+        List<SettlementEntity> settlements = settlementService.findAll();
+        return new ResponseEntity<>(settlements, HttpStatus.OK);
+    }
+
+    @GetMapping("name")
+    public ResponseEntity<List<SettlementEntity>> findByOrderByNameAsc() {
+        List<SettlementEntity> settlements =
+                settlementService.findByOrderByNameAsc();
+        return new ResponseEntity<>(settlements, HttpStatus.OK);
     }
 }
