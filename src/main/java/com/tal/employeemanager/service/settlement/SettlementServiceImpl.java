@@ -24,7 +24,7 @@ import java.util.List;
         for (Record record : records) {
             SettlementEntity settlementEntity = new SettlementEntity();
             settlementEntity.set_id(record.get_id());
-            settlementEntity.setName(record.getשם_ישוב());
+            settlementEntity.setName(record.getשם_ישוב().trim());
             settlementRepository.save(settlementEntity);
         }
     }
