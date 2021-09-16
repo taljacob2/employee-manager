@@ -30,6 +30,32 @@ import java.util.UUID;
     @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
 
+        Optional<SettlementEntity> settlementEntityOptional =
+                validateSettlementExists(employeeEntity);
+
+        return insertEmployee(employeeEntity, settlementEntityOptional.get());
+    }
+
+    private EmployeeEntity insertEmployee(EmployeeEntity employeeEntity,
+                                          SettlementEntity settlementEntity) {
+
+        // Update employee to have the parent settlement id
+        employeeEntity.getSettlementEntity().setId(settlementEntity.getId());
+
+        // Add this employee to the parent settlement
+        settlementEntity.getEmployeeEntities().add(employeeEntity);
+
+        /*
+         * Save the parent settlement.
+         * Also, automatically saves the child employee thanks to cascade.
+         */
+        settlementRepository.save(settlementEntity);
+
+        return employeeEntity;
+    }
+
+    private Optional<SettlementEntity> validateSettlementExists(
+            EmployeeEntity employeeEntity) {
         String settlementName = employeeEntity.getSettlementEntity().getName();
         Optional<SettlementEntity> settlementEntityOptional =
                 settlementRepository.findByName(settlementName);
@@ -39,7 +65,7 @@ import java.util.UUID;
                             settlementName));
         }
 
-        return employeeRepository.save(employeeEntity);
+        return settlementEntityOptional;
     }
 
     @Override public List<EmployeeEntity> findAll() {

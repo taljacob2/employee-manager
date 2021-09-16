@@ -10,6 +10,17 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * <i>IMPORTANT NOTE:</i>
+ * <pre>
+ * The code:
+ * {@code
+ * @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+ *          property = "id")
+ * }</pre>
+ * prevents the JSON response to send infinity loop. And instead, it sends the
+ * "id" of the {@code Entities}.
+ */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id") @Data @Entity(name = "employee") @Table
 public class EmployeeEntity implements Serializable {
@@ -27,8 +38,6 @@ public class EmployeeEntity implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageURL;
-    @ManyToOne
-    @JoinColumn(name = "שם_ישוב", referencedColumnName = "שם_ישוב",
-            nullable = true, insertable = false) private SettlementEntity settlementEntity;
+    @ManyToOne private SettlementEntity settlementEntity;
     @Column(nullable = false, updatable = false) private String code;
 }
