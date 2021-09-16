@@ -9,6 +9,10 @@ group = 'com.tal'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+// Enable UTF-8 compile
+compileJava {options.encoding = "UTF-8"}
+compileTestJava {options.encoding = "UTF-8"}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
