@@ -23,7 +23,7 @@ import java.util.List;
     @Override public void insertSettlementEntities(List<Record> records) {
         for (Record record : records) {
             SettlementEntity settlementEntity = new SettlementEntity();
-            settlementEntity.set_id(record.get_id());
+            settlementEntity.setId(record.get_id());
             settlementEntity.setName(record.getשם_ישוב().trim());
             settlementRepository.save(settlementEntity);
         }

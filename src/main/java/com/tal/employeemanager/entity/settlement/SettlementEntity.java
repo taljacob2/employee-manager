@@ -13,10 +13,10 @@ import java.io.Serializable;
 
     private static final long serialVersionUID = 6146613623865428922L;
 
-    @Id @Column(nullable = false) public int _id;
+    @Id @Column(unique = true, nullable = false) public int id;
 
     /**
      * Name in Hebrew.
      */
-    @Column(name = "שם_ישוב") public String name;
+    @Column(name = "שם_ישוב", unique = true) public String name;
 }

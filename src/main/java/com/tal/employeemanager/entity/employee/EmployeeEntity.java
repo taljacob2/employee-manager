@@ -27,9 +27,8 @@ public class EmployeeEntity implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageURL;
-    @ManyToOne
-    @JoinColumn(name = "settlement_id", updatable = false, insertable = false,
-            nullable = false, referencedColumnName = "_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "settlement_id", referencedColumnName = "id")
     private SettlementEntity settlementEntity;
     @Column(nullable = false, updatable = false) private String code;
 }
