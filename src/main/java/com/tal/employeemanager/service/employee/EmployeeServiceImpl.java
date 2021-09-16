@@ -1,7 +1,9 @@
 package com.tal.employeemanager.service.employee;
 
 import com.tal.employeemanager.entity.employee.EmployeeEntity;
+import com.tal.employeemanager.entity.settlement.SettlementEntity;
 import com.tal.employeemanager.repository.employee.EmployeeRepository;
+import com.tal.employeemanager.repository.settlement.SettlementRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,28 @@ import java.util.UUID;
 
     @Autowired EmployeeRepository employeeRepository;
 
-    private String entityNotFoundExceptionMessage(Long id) {
-        return "EmployeeEntity id `" + id + "` was not found.";
+    @Autowired SettlementRepository settlementRepository;
+
+    private String entityNotFoundExceptionMessage(String entity, String name) {
+        return entity + " name `" + name + "` was not found.";
+    }
+
+    private String entityNotFoundExceptionMessage(String entity, Long id) {
+        return entity + " id `" + id + "` was not found.";
     }
 
     @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
+
+        String settlementName = employeeEntity.getSettlementEntity().getName();
+        Optional<SettlementEntity> settlementEntityOptional =
+                settlementRepository.findByName(settlementName);
+        if (!settlementEntityOptional.isPresent()) {
+            throw new EntityNotFoundException(
+                    entityNotFoundExceptionMessage("SettlementEntity",
+                            settlementName));
+        }
+
         return employeeRepository.save(employeeEntity);
     }
 
@@ -37,7 +55,7 @@ import java.util.UUID;
                 employeeRepository.findById(id);
         if (!optionalEmployeeEntity.isPresent()) {
             throw new EntityNotFoundException(
-                    entityNotFoundExceptionMessage(id));
+                    entityNotFoundExceptionMessage("EmployeeEntity", id));
         }
         return optionalEmployeeEntity.get();
     }
