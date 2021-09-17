@@ -29,19 +29,12 @@ import java.util.UUID;
     }
 
     @Transactional public EmployeeEntity insert(EmployeeEntity employeeEntity) {
-        try {
-            employeeEntity.setCode(UUID.randomUUID().toString());
+        employeeEntity.setCode(UUID.randomUUID().toString());
 
-            Optional<SettlementEntity> settlementEntityOptional =
-                    validateSettlementExists(employeeEntity);
+        Optional<SettlementEntity> settlementEntityOptional =
+                validateSettlementExists(employeeEntity);
 
-            return insertEmployee(employeeEntity,
-                    settlementEntityOptional.get());
-        } catch (Exception e) {
-            log.warn(e.getMessage()); // debug
-            log.warn("HELLO?"); // debug
-        }
-        return null;
+        return insertEmployee(employeeEntity, settlementEntityOptional.get());
     }
 
     @Transactional EmployeeEntity insertEmployee(EmployeeEntity employeeEntity,
