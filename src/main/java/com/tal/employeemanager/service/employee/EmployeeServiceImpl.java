@@ -7,6 +7,7 @@ import com.tal.employeemanager.repository.settlement.SettlementRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -27,17 +28,24 @@ import java.util.UUID;
         return entity + " id `" + id + "` was not found.";
     }
 
-    @Override public EmployeeEntity insert(EmployeeEntity employeeEntity) {
-        employeeEntity.setCode(UUID.randomUUID().toString());
+    @Transactional public EmployeeEntity insert(EmployeeEntity employeeEntity) {
+        try {
+            employeeEntity.setCode(UUID.randomUUID().toString());
 
-        Optional<SettlementEntity> settlementEntityOptional =
-                validateSettlementExists(employeeEntity);
+            Optional<SettlementEntity> settlementEntityOptional =
+                    validateSettlementExists(employeeEntity);
 
-        return insertEmployee(employeeEntity, settlementEntityOptional.get());
+            return insertEmployee(employeeEntity,
+                    settlementEntityOptional.get());
+        } catch (Exception e) {
+            log.warn(e.getMessage()); // debug
+            log.warn("HELLO?"); // debug
+        }
+        return null;
     }
 
-    private EmployeeEntity insertEmployee(EmployeeEntity employeeEntity,
-                                          SettlementEntity settlementEntity) {
+    @Transactional EmployeeEntity insertEmployee(EmployeeEntity employeeEntity,
+                                                 SettlementEntity settlementEntity) {
 
         // Update employee to have the parent settlement id
         employeeEntity.getSettlementEntity().setId(settlementEntity.getId());
