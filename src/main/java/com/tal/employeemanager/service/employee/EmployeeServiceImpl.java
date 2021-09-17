@@ -42,35 +42,34 @@ import java.util.UUID;
     @Transactional(rollbackFor = Exception.class) EmployeeEntity insertEmployee(
             EmployeeEntity employeeEntity, SettlementEntity settlementEntity) {
 
-        // Update employee to have the parent settlement id
-        employeeEntity.getSettlementEntity().setId(settlementEntity.getId());
+        // Update employee to have the parent settlement.
+        employeeEntity.setSettlementEntity(settlementEntity);
 
-        // Add this employee to the parent settlement
+        // Add this employee to the parent settlement.
         settlementEntity.getEmployeeEntities().add(employeeEntity);
 
         /*
          * Save the parent settlement.
-         * Also, automatically saves the child employee thanks to cascade.
+         * This also automatically saves the child employee thanks to
+         * bidirectional cascade.
          */
         settlementRepository.save(settlementEntity);
 
-        List<EmployeeEntity> employeesInTheSettlement =
+        // Return the last inserted employee.
+        List<EmployeeEntity> employeeEntities =
                 settlementEntity.getEmployeeEntities();
-
-        // Returns the last employee inserted
-        return employeesInTheSettlement
-                .get(employeesInTheSettlement.size() - 1);
+        return employeeEntities.get(employeeEntities.size() - 1);
     }
 
     private Optional<SettlementEntity> validateSettlementExists(
             EmployeeEntity employeeEntity) {
-        String settlementName = employeeEntity.getSettlementEntity().getName();
+        Integer settlementId = employeeEntity.getSettlementEntity().getId();
         Optional<SettlementEntity> settlementEntityOptional =
-                settlementRepository.findByName(settlementName);
+                settlementRepository.findById(settlementId);
         if (!settlementEntityOptional.isPresent()) {
             throw new EntityNotFoundException(
                     entityNotFoundExceptionMessage("SettlementEntity",
-                            settlementName));
+                            (long) settlementId));
         }
 
         return settlementEntityOptional;

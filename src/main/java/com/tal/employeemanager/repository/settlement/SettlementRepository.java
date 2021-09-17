@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SettlementRepository
-        extends JpaRepository<SettlementEntity, Long> {
+        extends JpaRepository<SettlementEntity, Integer> {
     Optional<SettlementEntity> findByName(String name);
     List<SettlementEntity> findByOrderByNameAsc();
 }
