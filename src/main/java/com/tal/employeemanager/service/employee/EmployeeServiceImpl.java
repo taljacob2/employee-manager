@@ -51,7 +51,12 @@ import java.util.UUID;
          */
         settlementRepository.save(settlementEntity);
 
-        return employeeEntity;
+        List<EmployeeEntity> employeesInTheSettlement =
+                settlementEntity.getEmployeeEntities();
+
+        // Returns the last employee inserted
+        return employeesInTheSettlement
+                .get(employeesInTheSettlement.size() - 1);
     }
 
     private Optional<SettlementEntity> validateSettlementExists(
