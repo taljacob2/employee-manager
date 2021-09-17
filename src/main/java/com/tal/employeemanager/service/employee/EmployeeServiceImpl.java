@@ -28,7 +28,9 @@ import java.util.UUID;
         return entity + " id `" + id + "` was not found.";
     }
 
-    @Transactional public EmployeeEntity insert(EmployeeEntity employeeEntity) {
+    @Transactional(rollbackFor = Exception.class)
+
+    public EmployeeEntity insert(EmployeeEntity employeeEntity) {
         employeeEntity.setCode(UUID.randomUUID().toString());
 
         Optional<SettlementEntity> settlementEntityOptional =
@@ -37,8 +39,8 @@ import java.util.UUID;
         return insertEmployee(employeeEntity, settlementEntityOptional.get());
     }
 
-    @Transactional EmployeeEntity insertEmployee(EmployeeEntity employeeEntity,
-                                                 SettlementEntity settlementEntity) {
+    @Transactional(rollbackFor = Exception.class) EmployeeEntity insertEmployee(
+            EmployeeEntity employeeEntity, SettlementEntity settlementEntity) {
 
         // Update employee to have the parent settlement id
         employeeEntity.getSettlementEntity().setId(settlementEntity.getId());
