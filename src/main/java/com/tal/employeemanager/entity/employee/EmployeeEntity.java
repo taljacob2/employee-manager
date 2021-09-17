@@ -1,6 +1,7 @@
 package com.tal.employeemanager.entity.employee;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.tal.employeemanager.entity.settlement.SettlementEntity;
 import lombok.AccessLevel;
@@ -12,14 +13,28 @@ import java.io.Serializable;
 
 /**
  * <i>IMPORTANT NOTE:</i>
- * <pre>
+ * <ul>
+ *     <li>
  * The code:
+ * <pre>
  * {@code
  * @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
  *          property = "id")
  * }</pre>
- * prevents the JSON response to send infinity loop. And instead, it sends the
+ * prevents the JSON response to send infinity loop, and instead, it sends the
  * "id" of the {@code Entities}.
+ *
+ * <pre>
+ *     </li>
+ *     <li>
+ * And the code:
+ * {@code
+ * @JsonIdentityReference(alwaysAsId = true)
+ * }</pre>
+ * prevents the JSON response to send the whole Object, and in instead, it sends
+ * the "id" of it.
+ *      </li>
+ * </ul>
  */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id") @Data @Entity(name = "employee") @Table
@@ -38,7 +53,8 @@ public class EmployeeEntity implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageURL;
-    @ManyToOne @JoinColumn(name = "שם_ישוב", referencedColumnName = "שם_ישוב")
-    private SettlementEntity settlementEntity;
     @Column(nullable = false, updatable = false) private String code;
+    @JsonIdentityReference(alwaysAsId = true) @ManyToOne
+    @JoinColumn(name = "settlement_id") private SettlementEntity
+            settlementEntity;
 }
