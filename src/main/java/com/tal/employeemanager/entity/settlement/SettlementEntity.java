@@ -1,5 +1,6 @@
 package com.tal.employeemanager.entity.settlement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tal.employeemanager.entity.employee.EmployeeEntity;
 import lombok.Data;
 
@@ -21,5 +22,6 @@ import java.util.List;
             name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "settlementEntity")
-    @Column(name = "employees") private List<EmployeeEntity> employeeEntities;
+    @JsonBackReference @Column(name = "employees") private List<EmployeeEntity>
+            employeeEntities;
 }
