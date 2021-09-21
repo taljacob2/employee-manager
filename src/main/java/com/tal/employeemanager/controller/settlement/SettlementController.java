@@ -29,7 +29,7 @@ import java.util.Optional;
         return new ResponseEntity<>(settlements, HttpStatus.OK);
     }
 
-    @GetMapping("{id}}")
+    @GetMapping("{id}")
     public ResponseEntity<SettlementEntity> findById(@PathVariable int id) {
         Optional<SettlementEntity> settlementEntityOptional =
                 settlementService.findById(id);
