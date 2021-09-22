@@ -5,13 +5,15 @@ plugins {
     id 'war'
 }
 
+apply plugin: 'java'
+
 group = 'com.tal'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 // Enable UTF-8 compile
-compileJava {options.encoding = "UTF-8"}
-compileTestJava {options.encoding = "UTF-8"}
+compileJava { options.encoding = "UTF-8" }
+compileTestJava { options.encoding = "UTF-8" }
 
 configurations {
     compileOnly {
@@ -29,7 +31,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.2.23'
@@ -39,9 +41,9 @@ dependencies {
     implementation 'org.apache.commons:commons-dbcp2:2.9.0'
 }
 
-test {
-    useJUnitPlatform()
-}
+//test {
+//    useJUnitPlatform()
+//}
 
 nameArchive("web")
 
@@ -49,11 +51,4 @@ private void nameArchive(String name) {
     project.setArchivesBaseName(name)
     project.setVersion("")
 
-    jar {
-        classifier = ''
-    }
-
-    war {
-        classifier = ''
-    }
 }
