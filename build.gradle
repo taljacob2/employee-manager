@@ -33,6 +33,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.2.23'
+
+    // For `BasicDataSource` class in `HerokuPostgreSQLConfiguration`:
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+    implementation 'org.apache.commons:commons-dbcp2:2.9.0'
 }
 
 test {
