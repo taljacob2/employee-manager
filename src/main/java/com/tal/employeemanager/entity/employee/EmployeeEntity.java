@@ -1,7 +1,6 @@
 package com.tal.employeemanager.entity.employee;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.tal.employeemanager.entity.settlement.SettlementEntity;
 import lombok.AccessLevel;
@@ -54,7 +53,6 @@ public class EmployeeEntity implements Serializable {
     private String phone;
     private String imageURL;
     @Column(nullable = false, updatable = false) private String code;
-    @JsonIdentityReference(alwaysAsId = true) @ManyToOne
-    @JoinColumn(name = "settlement_id") private SettlementEntity
+    @ManyToOne @JoinColumn(name = "settlement_id") private SettlementEntity
             settlementEntity;
 }
