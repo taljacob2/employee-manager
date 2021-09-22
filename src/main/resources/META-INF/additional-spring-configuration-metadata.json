@@ -9,6 +9,11 @@
       "name": "record.api.fetch.enabled",
       "type": "java.lang.String",
       "description": "Description for record.api.fetch.enabled."
+    },
+    {
+      "name": "record.api.fetch.delay",
+      "type": "java.lang.String",
+      "description": "Description for record.api.fetch.delay."
     }
   ]
 }
