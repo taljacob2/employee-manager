@@ -12,7 +12,7 @@ services:
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-      - db:/var/lib/mysql
+      - db_data:/mysql_data
 
   adminer:
     image: adminer
@@ -38,15 +38,14 @@ services:
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "server.port" : "$SPRING_DOCKER_PORT"
       }'
-    #    volumes:
-    #      - .m2:/root/.m2
     stdin_open: true
     tty: true
 
 volumes:
-  db:
+  db_data: {}
 
 
 
