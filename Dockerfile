@@ -1,6 +1,5 @@
 # ----- `FROM` (this section MUST be first) -----
-# FROM scratch
-FROM openjdk:8
+FROM openjdk:8-jre-alpine
 # ----- `FROM` (this section MUST be first) -----
 
 
