@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
 
-  mysqldb:
+  db: # This is the DEFAULT `Server` name in `adminer`. DO NOT CHANGE THIS NAME.
     image: mysql
     restart: always
     env_file: ./.env
@@ -12,12 +12,12 @@ services:
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-      - db_data:/mysql_data
+      - db_data:/var/lib/mysql # CONST Directory names for InnoDB. DO NOT CHANGE THIS NAME.
 
   adminer:
     image: adminer
     depends_on:
-      - mysqldb
+      - db # Must -> Same as the `db` service name, as declared above.
     restart: always
     env_file: ./.env
     ports:
@@ -25,21 +25,21 @@ services:
 
   app:
     depends_on:
-      - mysqldb
+      - db # Must -> Same as the `db` service name, as declared above.
     build: .
     restart: always
     env_file: ./.env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
-    environment:
+    environment: # Note: "jdbc:mysql://`db`...  <- is the `Server` name in `adminer`. Same as the `db` service name, as declared above.
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  :
-        "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true",
+        "spring.datasource.url"  : "jdbc:mysql://db:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true",
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
         "spring.jpa.hibernate.ddl-auto" : "update",
-        "server.port" : "$SPRING_DOCKER_PORT"
+        "server.port" : "$SPRING_DOCKER_PORT",
+        "spring.datasource.driver-class-name" : "com.mysql.cj.jdbc.Driver"
       }'
     stdin_open: true
     tty: true
@@ -48,9 +48,9 @@ volumes:
   db_data: {}
 
 
+#------------------------------------
+# If you want to rename this network:
 
-#----------------------
-# Rename the network:
 #networks:
 #  default:
-#    name: mysql_network
+#    name: YOUR-NETWORK-NAME
