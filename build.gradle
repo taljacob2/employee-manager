@@ -54,5 +54,5 @@ nameArchive("app")
 
 private void nameArchive(String name) {
     project.setArchivesBaseName(name)
-    project.setVersion("0.0.1")
+    project.setVersion("")
 }
