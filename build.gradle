@@ -36,6 +36,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.2.23'
 
+//    Heroku required. Gradle already has this by default:
+//    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.5.5'
+
+    // Heroku required.
     // For `BasicDataSource` class in `HerokuPostgreSQLConfiguration`:
     // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
     implementation 'org.apache.commons:commons-dbcp2:2.9.0'
