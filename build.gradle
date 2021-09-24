@@ -50,10 +50,9 @@ dependencies {
 //    useJUnitPlatform()
 //}
 
-nameArchive("web")
+nameArchive("app")
 
 private void nameArchive(String name) {
     project.setArchivesBaseName(name)
-    project.setVersion("")
-
+    project.setVersion("0.0.1")
 }
