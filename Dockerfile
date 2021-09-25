@@ -4,16 +4,16 @@ FROM openjdk:8-jre-alpine
 
 
 # ----- Variables -----
-# Port
+# Port (MUST be the same as `SPRING_DOCKER_PORT` in `.env` file)
 ENV SPRING_DOCKER_PORT=8070
 # Name
 ARG APP_NAME=web.jar
-ARG APP_PATH=app-dir/$APP_NAME
+ENV APP_PATH=app-dir/$APP_NAME
 # ----- Variables -----
 
 
 # ----- Build -----
 EXPOSE $SPRING_DOCKER_PORT
 ADD build/libs/$APP_NAME $APP_PATH
-ENTRYPOINT ["java", "-jar", "app-dir/web.jar"]
+ENTRYPOINT java -jar $APP_PATH
 # ----- Build -----
