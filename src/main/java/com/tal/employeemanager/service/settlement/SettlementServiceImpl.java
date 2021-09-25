@@ -26,7 +26,10 @@ import java.util.Optional;
             SettlementEntity settlementEntity = new SettlementEntity();
             settlementEntity.setId(record.get_id());
             settlementEntity.setName(record.getשם_ישוב().trim());
-            settlementRepository.save(settlementEntity);
+            if (!settlementRepository.findByName(settlementEntity.getName())
+                    .isPresent()) {
+                settlementRepository.save(settlementEntity);
+            }
         }
     }
 
