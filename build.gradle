@@ -3,6 +3,18 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
+    id "com.heroku.sdk.heroku-gradle" version "2.0.0"
+}
+
+heroku {
+    appName = "taljacob-employee-manager"
+    includes = ["README.md"]
+    includes = ["build/libs/app.jar"]
+    includeBuildDir = false
+    jdkVersion = 8
+    processTypes(
+            web: "java -jar build/libs/app.jar"
+    )
 }
 
 apply plugin: 'java'

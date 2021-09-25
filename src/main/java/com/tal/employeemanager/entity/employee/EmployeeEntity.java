@@ -42,9 +42,10 @@ public class EmployeeEntity implements Serializable {
     private static final long serialVersionUID = -2330332252646363304L;
 
     @Id
-    @SequenceGenerator(name = "employee_sequence", schema = "employee_sequence",
-            allocationSize = 1) @GeneratedValue(generator = "employee_sequence",
-            strategy = GenerationType.IDENTITY)
+    // @SequenceGenerator(name = "employee_sequence", schema = "employee_sequence",
+    //         allocationSize = 1) @GeneratedValue(generator = "employee_sequence",
+    //         strategy = GenerationType.IDENTITY)
+    @GeneratedValue // TODO: check if can remove `schema` ^ and will be okay.
     @Column(nullable = false, updatable = false) @Setter(AccessLevel.NONE)
     private Long id;
     @Column(nullable = false) private String name;
