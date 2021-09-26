@@ -47,6 +47,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.2.23'
+
+    compileOnly "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    // https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin
+    implementation 'org.codehaus.mojo:exec-maven-plugin:3.0.0'
+
 }
 
 //test {
@@ -58,4 +64,11 @@ nameArchive("app")
 private void nameArchive(String name) {
     project.setArchivesBaseName(name)
     project.setVersion("")
+}
+
+
+war {
+    from('src/main/resources/frontend/employee-manager/dist/employee-manager') {
+        into('/')
+    }
 }

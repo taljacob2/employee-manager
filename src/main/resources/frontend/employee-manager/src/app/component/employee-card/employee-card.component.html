@@ -1,0 +1,48 @@
+<div class="card m-b-30">
+  <div class="card-body row">
+    <div class="col-6">
+      <a href=""><img
+        alt="" class="img-fluid rounded-circle w-60"
+        src="{{employee?.imageURL}}"></a>
+    </div>
+    <div class="col-6 card-title align-self-center mb-0">
+      <h5>{{employee?.name}}</h5>
+      <p class="m-0">{{employee?.jobTitle}}</p>
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>
+      Email: <a href="#">{{employee?.email}}</a></li>
+    <li class="list-group-item"><i class="fa fa-phone float-right"></i>
+      Phone:
+      <p class="m-0">{{employee?.phone}}</p>
+    </li>
+  </ul>
+  <div class="card-body">
+    <div class="float-right btn-group btn-group-sm">
+      <a class="btn btn-primary tooltips" data-original-title="Edit" data-placement="top"
+         data-toggle="tooltip" href="#"><i
+        class="fa fa-pencil"></i> </a>
+      <a class="btn btn-secondary tooltips" data-original-title="Delete" data-placement="top"
+         data-toggle="tooltip" href="#"><i
+        class="fa fa-times"></i></a>
+    </div>
+    <ul class="social-links list-inline mb-0">
+      <li class="list-inline-item"><a class="tooltips" data-original-title="Facebook"
+                                      data-placement="top"
+                                      data-toggle="tooltip" href=""
+                                      title=""><i
+        class="fa fa-facebook-f"></i></a></li>
+      <li class="list-inline-item"><a class="tooltips" data-original-title="Twitter"
+                                      data-placement="top"
+                                      data-toggle="tooltip" href=""
+                                      title=""><i
+        class="fa fa-twitter"></i></a></li>
+      <li class="list-inline-item"><a class="tooltips" data-original-title="Skype"
+                                      data-placement="top"
+                                      data-toggle="tooltip" href=""
+                                      title=""><i
+        class="fa fa-skype"></i></a></li>
+    </ul>
+  </div>
+</div>
