@@ -1,8 +1,11 @@
 # Employee manager
 # https://taljacob-employee-manager.herokuapp.com/
 
-> A website example for deploying Springboot + SQL + Angular to Heroku, via
-> Gradle.  
+ A website example for deploying Springboot + SQL + Angular to Heroku, via
+ Gradle.
+ 
+> NOTE: this project was made locally with MySQL, though deployed with
+> PostgreSQL fluently without any differences.
 ---
 
 # GUIDE: Springboot + Gradle + Angular: Deploy to Heroku
