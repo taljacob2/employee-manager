@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "C:\\Users\\Tal\\C_Code\\java\\employee-manager\\src\\main\\resources\\static",
+            "outputPath": "../resources/static",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
