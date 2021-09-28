@@ -6,11 +6,6 @@
 
 # GUIDE: Springboot + Gradle + Angular: Deploy to Heroku
 
-## Project Sample:
-## https://github.com/taljacob2/employee-manager
-
----
-
 1. [Sign up](https://signup.heroku.com/) a new user in Heroku.
 
 1. Download [HerokuCLI](https://devcenter.heroku.com/articles/heroku-cli).
