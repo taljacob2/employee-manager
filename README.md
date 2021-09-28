@@ -34,7 +34,8 @@
    ```
    > Set `YOUR-APP-UNIQUE-NAME` to be the same as your definition in *[Step 4]*.
 
-1. Set `application.properties` file to the PostgreSQL database:
+1. Set [application.properties](src/main/resources/application.properties) file to the PostgreSQL
+ database:
 
 	```properties
 	#--------------------------------------------
