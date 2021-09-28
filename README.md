@@ -73,16 +73,20 @@
 	> *Side Note:*
  Do *NOT* create any `schema` when using PostgreSQL. Because the database would not be able to `spring.jpa.hibernate.ddl-auto=` `update` / `create` it on boot.
 
-1. Create a new folder and place your angular project there.
+1. Create a new folder and place your angular project there. For example
+ [angular](src/main/angular).
 
-1. Change the angular's `angular.json` file `outputPath` *(JSON pointer is: /projects/PROJECT_NAME/architect/build/options/outputPath)* to the `static` folder of the Springboot application.
+1. Change the [angular.json](src/main/angular/angular.json) file
+ `outputPath
+` property *(JSON pointer is: /projects/PROJECT_NAME/architect/build/options
+/outputPath)* to the `static` folder of the Springboot application.
 For example:
 
 	```json
 	 "outputPath": "../resources/static"
 	```
 
-1. Navigate to the angular directory you made and build its project with the terminal command:
+1. Navigate to the [angular](src/main/angular) directory you made and build its project with the terminal command:
 
 	```
 	ng build
@@ -93,7 +97,7 @@ For example:
 	1. #### Build a .jar file:
 		> It is a *MUST* to do so with the **`bootJar`** command.
 
-		To *name your .jar*, add this template to your `build.gradle`.
+		To *name your .jar*, add this template to your [build.gradle](build.gradle) file.
 
 		```groovy
 		nameArchive("app")
@@ -112,7 +116,7 @@ For example:
 		```
 
 	1. #### Deploy to Heroku:
-		Add this template to your `build.gradle`.
+		Add this template to your [build.gradle](build.gradle) file.
 
 		```groovy
 		plugins {
