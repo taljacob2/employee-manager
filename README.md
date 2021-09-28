@@ -78,8 +78,7 @@
  [angular](src/main/angular).
 
 1. Change the [angular.json](src/main/angular/angular.json) file
- `outputPath
-` property *(JSON pointer is: /projects/PROJECT_NAME/architect/build/options
+ `outputPath` property *(JSON pointer is: /projects/PROJECT_NAME/architect/build/options
 /outputPath)* to the [static](src/main/resources/static) folder of the Springboot application.
 For example:
 
