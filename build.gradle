@@ -47,12 +47,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.2.23'
-
-    compileOnly "org.springframework.boot:spring-boot-starter-thymeleaf"
-
-    // https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin
-    implementation 'org.codehaus.mojo:exec-maven-plugin:3.0.0'
-
 }
 
 //test {
@@ -67,8 +61,61 @@ private void nameArchive(String name) {
 }
 
 
-war {
-    from('src/main/resources/frontend/employee-manager/dist/employee-manager') {
-        into('/')
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//def webappDir = "$projectDir/src/main/angular"
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs = ["$webappDir/dist", "$projectDir/src/main/resources"]
+//        }
+//    }
+//}
+//
+//processResources {
+//    dependsOn "buildAngular"
+//}
+//
+//task buildAngular(type:Exec) {
+//
+//    // installAngular should be run prior to this task
+//    dependsOn "installAngular"
+//    workingDir "$webappDir"
+//    inputs.dir "$webappDir"
+//
+//    // Add task to the standard build group
+//    group = BasePlugin.BUILD_GROUP
+//
+//    // ng doesn't exist as a file in windows -> ng.cmd
+//    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+//        commandLine "ng.cmd", "build"
+//    } else {
+//        commandLine "ng", "build"
+//    }
+//}
+//
+//task installAngular(type:Exec) {
+//    workingDir "$webappDir"
+//    inputs.dir "$webappDir"
+//    group = BasePlugin.BUILD_GROUP
+//    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+//        commandLine "npm.cmd", "install"
+//    } else {
+//        commandLine "npm", "install"
+//    }
+//}
