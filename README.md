@@ -1,4 +1,5 @@
-# Employee manager https://taljacob-employee-manager.herokuapp.com/
+# Employee manager
+# https://taljacob-employee-manager.herokuapp.com/
 
 > A website example for deploying Springboot + SQL + Angular to Heroku, via
 > Gradle.  
