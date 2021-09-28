@@ -1,0 +1,11 @@
+<!-- NOTE: class="ng-dirty ng-invalid" warns that the input is invalid -->
+<p-autoComplete (completeMethod)="searchSettlement($event)"
+                (onSelect)="outputToParent()"
+                [(ngModel)]="selectedSettlement"
+                [class.ng-dirty]="!this.selectedSettlement?.id"
+                [class.ng-invalid]="!this.selectedSettlement?.id"
+                [dropdown]="true"
+                [suggestions]="selectableSettlements"
+                field="name"
+                placeholder="שם ישוב"></p-autoComplete>
+<!--<pre>{{selectedSettlement | json}}</pre> &lt;!&ndash; TODO: for debug &ndash;&gt;-->

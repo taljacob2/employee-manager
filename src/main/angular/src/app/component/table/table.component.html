@@ -1,0 +1,35 @@
+<p-table [value]="employees" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Job Title</th>
+      <th>Phone</th>
+      <th>Image</th>
+      <th>Code</th>
+      <th>Settlement Name</th>
+      <th></th> <!-- blank header reserved for `app-dialog` -->
+    </tr>
+  </ng-template>
+  <ng-template let-employee pTemplate="body">
+    <tr>
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.jobTitle}}</td>
+      <td>{{employee.phone}}</td>
+      <td>
+        <div class="col-6">
+          <a href=""><img
+            alt="" class="img-fluid rounded-circle w-60"
+            src="{{employee?.imageURL}}"></a>
+        </div>
+      </td>
+      <td>{{employee.code}}</td>
+      <td>{{employee.settlementEntity.name}}</td>
+      <td>
+        <edit-employee-dialog [employeeToEdit]="employee"
+                              [settlements]="settlements"></edit-employee-dialog>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
