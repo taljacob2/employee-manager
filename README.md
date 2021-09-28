@@ -1,4 +1,15 @@
-# Deploy Springboot Gradle to Heroku
+# Employee manager https://taljacob-employee-manager.herokuapp.com/
+
+> A website example for deploying Springboot + SQL + Angular to Heroku, via
+> Gradle.  
+---
+
+# GUIDE: Springboot + Gradle + Angular: Deploy to Heroku
+
+## Project Sample:
+## https://github.com/taljacob2/employee-manager
+
+---
 
 1. [Sign up](https://signup.heroku.com/) a new user in Heroku.
 
@@ -62,6 +73,21 @@
 
 	> *Side Note:*
  Do *NOT* create any `schema` when using PostgreSQL. Because the database would not be able to `spring.jpa.hibernate.ddl-auto=` `update` / `create` it on boot.
+
+1. Create a new folder and place your angular project there.
+
+1. Change the angular's `angular.json` file `outputPath` *(JSON pointer is: /projects/PROJECT_NAME/architect/build/options/outputPath)* to the `static` folder of the Springboot application.
+For example:
+
+	```json
+	 "outputPath": "../resources/static"
+	```
+
+1. Navigate to the angular directory you made and build its project with the terminal command:
+
+	```
+	ng build
+	```
 
 1. We use the [Heroku Gradle Plugin](https://github.com/heroku/heroku-gradle) to deploy:
 
